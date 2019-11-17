@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+    <GridLayout
+        android:minWidth="25dp"
+        android:minHeight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="1"
+        android:id="@+id/gridLayout1">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:id="@+id/imageView_status_icon"
+            android:layout_gravity="center_vertical|fill_horizontal"
+            android:layout_column="0"
+            android:layout_columnWeight="1" />
+        <TextView
+            android:text="10 C"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView_temperature"
+            android:layout_gravity="center_vertical|fill_horizontal"
+            android:layout_columnWeight="1"
+            android:layout_column="1"/>
+    </GridLayout>
+</LinearLayout>
