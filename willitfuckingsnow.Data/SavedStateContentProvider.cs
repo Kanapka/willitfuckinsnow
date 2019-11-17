@@ -6,7 +6,7 @@ using Uri = Android.Net.Uri;
 
 namespace willitfuckingsnow.Data
 {
-    public class WeatherStateProvider : ContentProvider
+    public class SavedStateContentProvider : ContentProvider
     {
         public override int Delete(Uri uri, string selection, string[] selectionArgs)
         {
