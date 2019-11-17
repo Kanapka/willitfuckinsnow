@@ -46,9 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WeatherStateProvider.cs" />
+    <Compile Include="SavedState\SavedStateContentProvider.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Weather\IWeatherRepository.cs" />
+    <Compile Include="Weather\WeatherRepository.cs" />
+    <Compile Include="Weather\WeatherStateDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ViewPagerAdapter.cs" />
+    <Compile Include="App.cs" />
     <Compile Include="Fragments\AppPage.cs" />
     <Compile Include="Fragments\Current.cs" />
     <Compile Include="Fragments\Forecast.cs" />
@@ -142,6 +143,12 @@
     <AndroidResource Include="Resources\layout\loading.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\willitfuckingsnow.Data\willitfuckingsnow.Data.csproj">
+      <Project>{c343b263-21e8-4314-928b-85a66f7764eb}</Project>
+      <Name>willitfuckingsnow.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
