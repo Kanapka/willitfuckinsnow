@@ -26,7 +26,7 @@ namespace willitfuckingsnow
         public override void OnCreate()
         {
             var container = TinyIoCContainer.Current;
-            container.Register<IWeatherRepository, WeatherRepository>().AsSingleton();
+            container.Register<IWeatherRepository>(new WeatherRepository());
 
             var pageCollection = new AppPageCollection();
             var _pages = new AppPage[]{
@@ -36,7 +36,7 @@ namespace willitfuckingsnow
             };
             pageCollection.Pages = _pages;
 
-            container.Register(pageCollection).AsSingleton();
+            container.Register(pageCollection);
             base.OnCreate();
         }
     }

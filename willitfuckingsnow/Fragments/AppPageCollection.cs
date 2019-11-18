@@ -15,7 +15,7 @@ namespace willitfuckingsnow.Fragments
 {
     class AppPageCollection
     {
-        private List<AppPage> pages;
+        private List<AppPage> pages = new List<AppPage>();
         public AppPage[] Pages { get => pages.ToArray(); set => pages.AddRange(value); }
 
     }
