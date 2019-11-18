@@ -8,36 +8,28 @@ using Android.Widget;
 using willitfuckingsnow.Adapters;
 using willitfuckingsnow.Fragments;
 using Android.Support.V4.App;
+using TinyIoC;
 
 namespace willitfuckingsnow
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : FragmentActivity
     {
-        TextView textMessage { get; set; }
         AppPage[] Pages { get; set; }
-        ViewPager viewPager { get; set; }
-        BottomNavigationView navigation { get; set; }
+        ViewPager ViewPager { get; set; }
+        BottomNavigationView Navigation { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-
-            Pages = new AppPage[]
-            {
-                new Current(),
-                new Forecast(),
-                new Settings()
-            };
+            Pages = TinyIoCContainer.Current.Resolve<AppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
 
             SetContentView(Resource.Layout.activity_main);
-
-            textMessage = FindViewById<TextView>(Resource.Id.message);
-            viewPager = FindViewById<ViewPager>(Resource.Id.vievpager);
-            viewPager.Adapter = new ViewPagerAdapter(SupportFragmentManager, Pages);
-            navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
-            navigation.NavigationItemSelected += OnNavigationItemSelected;
+            ViewPager = FindViewById<ViewPager>(Resource.Id.vievpager);
+            ViewPager.Adapter = new ViewPagerAdapter(SupportFragmentManager, Pages);
+            Navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
+            Navigation.NavigationItemSelected += OnNavigationItemSelected;
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -47,7 +39,7 @@ namespace willitfuckingsnow
         }
         private void OnNavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs args)
         {
-            viewPager.SetCurrentItem(args.Item.Order, true);
+            ViewPager.SetCurrentItem(args.Item.Order, true);
         }
     }
 }

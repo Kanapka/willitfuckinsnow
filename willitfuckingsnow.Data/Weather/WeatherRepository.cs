@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace willitfuckingsnow.Data.Weather
 {
-    class WeatherRepository : IWeatherRepository
+    public class WeatherRepository : IWeatherRepository
     {
         public WeatherStateDTO Get()
         {

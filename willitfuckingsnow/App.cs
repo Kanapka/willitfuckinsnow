@@ -9,6 +9,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using willitfuckingsnow.Data.Weather;
+using TinyIoC;
+using willitfuckingsnow.Fragments;
+
 
 namespace willitfuckingsnow
 {
@@ -21,7 +25,18 @@ namespace willitfuckingsnow
 
         public override void OnCreate()
         {
+            var container = TinyIoCContainer.Current;
+            container.Register<IWeatherRepository, WeatherRepository>().AsSingleton();
 
+            var pageCollection = new AppPageCollection();
+            var _pages = new AppPage[]{
+                new Current(),
+                new Forecast(),
+                new Settings()
+            };
+            pageCollection.Pages = _pages;
+
+            container.Register(pageCollection).AsSingleton();
             base.OnCreate();
         }
     }

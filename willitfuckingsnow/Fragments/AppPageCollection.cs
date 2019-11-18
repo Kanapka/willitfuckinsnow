@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace willitfuckingsnow.Data.Weather
+namespace willitfuckingsnow.Fragments
 {
-    public interface IWeatherRepository
+    class AppPageCollection
     {
-        WeatherStateDTO Get();
+        private List<AppPage> pages;
+        public AppPage[] Pages { get => pages.ToArray(); set => pages.AddRange(value); }
+
     }
 }

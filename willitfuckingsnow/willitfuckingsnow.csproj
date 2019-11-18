@@ -63,12 +63,14 @@
     <Compile Include="Adapters\ViewPagerAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Fragments\AppPage.cs" />
+    <Compile Include="Fragments\AppPageCollection.cs" />
     <Compile Include="Fragments\Current.cs" />
     <Compile Include="Fragments\Forecast.cs" />
     <Compile Include="Fragments\Settings.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
