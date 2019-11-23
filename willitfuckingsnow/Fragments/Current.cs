@@ -12,12 +12,19 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Fragment = Android.Support.V4.App.Fragment;
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
 
 namespace willitfuckingsnow.Fragments
 {
     public class Current : AppPage
     {
         public string Location { get; set; } = "";
+
+        public Current(IReduxStore<IApplicationState> store) : base()
+        {
+            store.Subscribe(this);
+        }
 
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -31,14 +38,19 @@ namespace willitfuckingsnow.Fragments
 
             var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
             var location = view.FindViewById<TextView>(Resource.Id.textView_location);
-            location.Text = "FUCK";
-            Task.Run(() =>
-            {
-                Thread.Sleep(5000);
-                location.Text = "lol wtf";
-            });
             return view;
+        }
 
+        public override void OnNext(IApplicationState state)
+        {
+            if (this.View is View view)
+            {
+                view.FindViewById<TextView>(Resource.Id.textView_location).Text = state.Location;
+                view.FindViewById<TextView>(Resource.Id.textView_status).Text = state.Status;
+                view.FindViewById<TextView>(Resource.Id.textView_date).Text = state.Date.ToString("MMMM dd, yyyy");
+                view.FindViewById<TextView>(Resource.Id.textView_additional).Text = state.AdditionalStatus;
+                view.FindViewById<TextView>(Resource.Id.textView_temperature).Text = $"{state.Temperature} °C";
+            }
         }
     }
 }

@@ -9,6 +9,11 @@ using willitfuckingsnow.Adapters;
 using willitfuckingsnow.Fragments;
 using Android.Support.V4.App;
 using TinyIoC;
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Data;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace willitfuckingsnow
 {
@@ -22,6 +27,14 @@ namespace willitfuckingsnow
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
+            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
+            Task.Run(() =>
+            {
+                Thread.Sleep(4000);
+                store.Commit(x => Actions.CurrentViewLoaded(x));
+            });
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Pages = TinyIoCContainer.Current.Resolve<IAppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
 

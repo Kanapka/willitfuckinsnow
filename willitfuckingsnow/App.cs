@@ -12,7 +12,8 @@ using Android.Widget;
 using willitfuckingsnow.Data.Weather;
 using TinyIoC;
 using willitfuckingsnow.Fragments;
-
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
 
 namespace willitfuckingsnow
 {
@@ -26,7 +27,13 @@ namespace willitfuckingsnow
         public override void OnCreate()
         {
             var container = TinyIoCContainer.Current;
+
+            //data resources
             container.Register<IWeatherRepository>(new WeatherRepository());
+            container.Register<IApplicationState, ApplicationState>().AsSingleton();
+            container.Register<IReduxStore<IApplicationState>, ReduxStore<IApplicationState>>().AsSingleton();
+
+            // display resources
             container.Register<IAppPageCollection, WeatherPageCollection>();
             base.OnCreate();
         }

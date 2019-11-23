@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
+using willitfuckingsnow.Data.State;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace willitfuckingsnow.Fragments
@@ -24,6 +25,10 @@ namespace willitfuckingsnow.Fragments
         {
             return inflater.Inflate(Resource.Layout.fragment_settings, container, false);
 
+        }
+
+        public override void OnNext(IApplicationState state)
+        {
         }
     }
 }
