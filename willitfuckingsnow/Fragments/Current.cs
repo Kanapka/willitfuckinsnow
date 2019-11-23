@@ -14,6 +14,7 @@ using Android.Widget;
 using Fragment = Android.Support.V4.App.Fragment;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Data;
 
 namespace willitfuckingsnow.Fragments
 {
@@ -21,9 +22,8 @@ namespace willitfuckingsnow.Fragments
     {
         public string Location { get; set; } = "";
 
-        public Current(IReduxStore<IApplicationState> store) : base()
+        public Current(IReduxStore<IApplicationState> store) : base(store)
         {
-            store.Subscribe(this);
         }
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -35,10 +35,14 @@ namespace willitfuckingsnow.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-
             var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
-            var location = view.FindViewById<TextView>(Resource.Id.textView_location);
+            view.FindViewById(Resource.Id.button_refreshCurrent).Click += OnRefreshButtonPressed;
             return view;
+        }
+
+        public void OnRefreshButtonPressed(object sender, EventArgs args)
+        {
+            store.Dispatch(Actions.CurrentViewLoaded);
         }
 
         public override void OnNext(IApplicationState state)

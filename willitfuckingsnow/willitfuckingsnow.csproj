@@ -142,11 +142,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\loading.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\willitfuckingsnow.Data\willitfuckingsnow.Data.csproj">
       <Project>{c343b263-21e8-4314-928b-85a66f7764eb}</Project>
       <Name>willitfuckingsnow.Data</Name>

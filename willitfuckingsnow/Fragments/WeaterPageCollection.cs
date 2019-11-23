@@ -29,8 +29,8 @@ namespace willitfuckingsnow.Fragments
         {
             pages = new List<AppPage>{
                 new Current(store),
-                new Forecast(),
-                new Settings()
+                new Forecast(store),
+                new Settings(store)
             };
         }
     }

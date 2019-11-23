@@ -28,13 +28,6 @@ namespace willitfuckingsnow
         {
             base.OnCreate(savedInstanceState);
 
-            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
-            Task.Run(() =>
-            {
-                Thread.Sleep(4000);
-                store.Commit(x => Actions.CurrentViewLoaded(x));
-            });
-
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Pages = TinyIoCContainer.Current.Resolve<IAppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
 

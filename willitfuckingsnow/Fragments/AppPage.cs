@@ -12,11 +12,21 @@ using Android.Views;
 using Android.Widget;
 using Fragment = Android.Support.V4.App.Fragment;
 using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Data.Redux;
 
 namespace willitfuckingsnow.Fragments
 {
     public abstract class AppPage : Fragment, IObserver<IApplicationState>
     {
+        protected IReduxStore<IApplicationState> store;
+
+        public AppPage(IReduxStore<IApplicationState> _store)
+        {
+            store = _store;
+            store.Subscribe(this);
+            OnNext(store.State);
+        }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
