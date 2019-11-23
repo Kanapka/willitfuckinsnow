@@ -23,7 +23,7 @@ namespace willitfuckingsnow
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Pages = TinyIoCContainer.Current.Resolve<AppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
+            Pages = TinyIoCContainer.Current.Resolve<IAppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
 
             SetContentView(Resource.Layout.activity_main);
             ViewPager = FindViewById<ViewPager>(Resource.Id.vievpager);

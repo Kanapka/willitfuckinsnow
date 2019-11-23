@@ -13,10 +13,23 @@ using Android.Widget;
 
 namespace willitfuckingsnow.Fragments
 {
-    class AppPageCollection
+    public interface IAppPageCollection
+    {
+        AppPage[] Pages { get; set; }
+    }
+
+    public class WeatherPageCollection : IAppPageCollection
     {
         private List<AppPage> pages = new List<AppPage>();
         public AppPage[] Pages { get => pages.ToArray(); set => pages.AddRange(value); }
 
+        public WeatherPageCollection()
+        {
+            pages = new List<AppPage>{
+                new Current(),
+                new Forecast(),
+                new Settings()
+            };
+        }
     }
 }

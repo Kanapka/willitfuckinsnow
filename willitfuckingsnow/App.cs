@@ -27,16 +27,7 @@ namespace willitfuckingsnow
         {
             var container = TinyIoCContainer.Current;
             container.Register<IWeatherRepository>(new WeatherRepository());
-
-            var pageCollection = new AppPageCollection();
-            var _pages = new AppPage[]{
-                new Current(),
-                new Forecast(),
-                new Settings()
-            };
-            pageCollection.Pages = _pages;
-
-            container.Register(pageCollection);
+            container.Register<IAppPageCollection, WeatherPageCollection>();
             base.OnCreate();
         }
     }

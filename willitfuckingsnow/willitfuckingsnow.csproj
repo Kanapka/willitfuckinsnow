@@ -63,7 +63,7 @@
     <Compile Include="Adapters\ViewPagerAdapter.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Fragments\AppPage.cs" />
-    <Compile Include="Fragments\AppPageCollection.cs" />
+    <Compile Include="Fragments\WeaterPageCollection.cs" />
     <Compile Include="Fragments\Current.cs" />
     <Compile Include="Fragments\Forecast.cs" />
     <Compile Include="Fragments\Settings.cs" />

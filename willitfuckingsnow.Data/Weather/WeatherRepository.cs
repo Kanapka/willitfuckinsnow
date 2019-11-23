@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,14 +15,15 @@ namespace willitfuckingsnow.Data.Weather
 {
     public class WeatherRepository : IWeatherRepository
     {
-        public WeatherStateDTO Get()
+        public Task<WeatherStateDTO> Get()
         {
-            return new WeatherStateDTO
+            Thread.Sleep(1500);
+            return Task.FromResult(new WeatherStateDTO
             {
                 Weather = "Fucked",
                 Temperature = -4,
                 SnowCover = 7
-            };
+            });
         }
     }
 }

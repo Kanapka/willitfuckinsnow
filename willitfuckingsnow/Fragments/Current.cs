@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -16,6 +17,8 @@ namespace willitfuckingsnow.Fragments
 {
     public class Current : AppPage
     {
+        public string Location { get; set; } = "";
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -25,8 +28,16 @@ namespace willitfuckingsnow.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            return inflater.Inflate(Resource.Layout.fragment_current, container, false);
+
+            var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
+            var location = view.FindViewById<TextView>(Resource.Id.textView_location);
+            location.Text = "FUCK";
+            Task.Run(() =>
+            {
+                Thread.Sleep(5000);
+                location.Text = "lol wtf";
+            });
+            return view;
 
         }
     }
