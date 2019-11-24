@@ -53,6 +53,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State\ApplicationState.cs" />
+    <Compile Include="State\WeatherState.cs" />
     <Compile Include="Weather\IWeatherRepository.cs" />
     <Compile Include="Weather\WeatherRepository.cs" />
     <Compile Include="Weather\WeatherStateDTO.cs" />

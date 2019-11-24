@@ -9,4 +9,9 @@
         android:text="Wednesday"
         android:layout_margin="8dp"
         android:layout_height="match_parent" />
+    <TextView
+        android:layout_width="match_parent"
+        android:text="15C"
+        android:layout_margin="8dp"
+        android:layout_height="match_parent" />
 </LinearLayout>

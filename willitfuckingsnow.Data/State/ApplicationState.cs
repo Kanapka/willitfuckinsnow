@@ -8,11 +8,10 @@ namespace willitfuckingsnow.Data.State
 {
     public interface IApplicationState
     {
-        string Location { get; set; }
-        DateTime Date { get; set; }
-        string Status { get; set; }
-        string AdditionalStatus { get; set; }
-        float Temperature { get; set; }
+        WeatherState Today { get; set; }
+        bool LoadingToday { get; set; }
+        IEnumerable<WeatherState> Future { get; set; }
+        bool LoadingFuture { get; set; }
     }
     public class ApplicationState : IApplicationState
     {
@@ -20,10 +19,10 @@ namespace willitfuckingsnow.Data.State
         {
             ;
         }
-        public string Location { get; set; } = "";
-        public DateTime Date { get; set; } = DateTime.Now;
-        public string Status { get; set; } = "";
-        public string AdditionalStatus { get; set; } = "";
-        public float Temperature { get; set; } = 0;
+        public WeatherState Today { get; set; } = new WeatherState();
+        public bool LoadingToday { get; set; } = false;
+        public IEnumerable<WeatherState> Future { get; set; } = new List<WeatherState>();
+        public bool LoadingFuture { get; set; } = false;
+
     }
 }
