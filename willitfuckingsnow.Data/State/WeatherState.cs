@@ -19,5 +19,10 @@ namespace willitfuckingsnow.Data.State
         public string Status { get; set; } = "";
         public string AdditionalStatus { get; set; } = "";
         public float Temperature { get; set; } = 0;
+
+        public override string ToString() => $"{Date.ToString("dd")}, {Temperature} °C, {Status}";
+
+
+
     }
 }

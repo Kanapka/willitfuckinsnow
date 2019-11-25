@@ -15,7 +15,8 @@ namespace willitfuckingsnow.Data.Redux
     public class ReduxStore<TReduxState> : IReduxStore<TReduxState>
     {
         public TReduxState State { get; private set; }
-        List<IObserver<TReduxState>> Observers = new List<IObserver<TReduxState>>();
+
+        readonly List<IObserver<TReduxState>> Observers = new List<IObserver<TReduxState>>();
 
         public ReduxStore(TReduxState initialState)
         {

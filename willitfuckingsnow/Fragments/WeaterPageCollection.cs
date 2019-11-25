@@ -12,22 +12,23 @@ using Android.Views;
 using Android.Widget;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace willitfuckingsnow.Fragments
 {
     public interface IAppPageCollection
     {
-        AppPage[] Pages { get; set; }
+        Fragment[] Pages { get; set; }
     }
 
     public class WeatherPageCollection : IAppPageCollection
     {
-        private List<AppPage> pages = new List<AppPage>();
-        public AppPage[] Pages { get => pages.ToArray(); set => pages.AddRange(value); }
+        private List<Fragment> pages = new List<Fragment>();
+        public Fragment[] Pages { get => pages.ToArray(); set => pages.AddRange(value); }
 
         public WeatherPageCollection(IReduxStore<IApplicationState> store)
         {
-            pages = new List<AppPage>{
+            pages = new List<Fragment>{
                 new Current(store),
                 new Forecast(store),
                 new Settings(store)

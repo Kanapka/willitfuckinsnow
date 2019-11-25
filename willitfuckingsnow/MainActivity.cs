@@ -14,13 +14,14 @@ using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Data;
 using System.Threading.Tasks;
 using System.Threading;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace willitfuckingsnow
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : FragmentActivity
     {
-        AppPage[] Pages { get; set; }
+        Fragment[] Pages { get; set; }
         ViewPager ViewPager { get; set; }
         BottomNavigationView Navigation { get; set; }
 
