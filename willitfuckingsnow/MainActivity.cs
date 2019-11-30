@@ -47,6 +47,9 @@ namespace willitfuckingsnow
         private void OnNavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs args)
         {
             ViewPager.SetCurrentItem(args.Item.Order, true);
+            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
+            store.Dispatch(Actions.SwitchToForecast);
+            store.Dispatch(Actions.SwitchToCurrent);
         }
     }
 }

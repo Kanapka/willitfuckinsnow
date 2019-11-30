@@ -18,9 +18,9 @@ namespace willitfuckingsnow.Adapters
     {
 
         Context context;
-        WeatherState[] States = new WeatherState[] { };
+        List<WeatherState> States = new List<WeatherState> { };
 
-        public ForecastAdapter(Context context, WeatherState[] states)
+        public ForecastAdapter(Context context, List<WeatherState> states)
         {
             this.context = context;
             this.States = states;
@@ -59,12 +59,18 @@ namespace willitfuckingsnow.Adapters
             return view;
         }
 
-        public override int Count => States.Length;
+        public override int Count => States.Count;
 
         public override WeatherState this[int position]
-            => position > States.Length
+            => position > States.Count
             ? new WeatherState()
             : States[position];
+
+        public void Update(IEnumerable<WeatherState> newState)
+        {
+            States.Clear();
+            States.AddRange(newState);
+        }
     }
 
     class ForecastAdapterViewHolder : Java.Lang.Object

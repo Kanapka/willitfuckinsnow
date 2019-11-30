@@ -19,10 +19,14 @@ namespace willitfuckingsnow.Data.State
         public string Status { get; set; } = "";
         public string AdditionalStatus { get; set; } = "";
         public float Temperature { get; set; } = 0;
+        public float SnowCover { get; set; } = 0;
+        public string SnowStatus
+        {
+            get => SnowCover > 0
+                ? "Fucking snows"
+                : "Will be goddamn clear";
+        }
 
         public override string ToString() => $"{Date.ToString("dd")}, {Temperature} °C, {Status}";
-
-
-
     }
 }

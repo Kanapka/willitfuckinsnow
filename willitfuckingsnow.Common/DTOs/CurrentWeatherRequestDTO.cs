@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace willitfuckingsnow.API.DTOs
+namespace willitfuckingsnow.Common.DTOs
 {
-    public class CurrentWeatherRequestDTO
+    public class LocationDTO
     {
         public float Longitude { get; set; }
         public float Latitude { get; set; }

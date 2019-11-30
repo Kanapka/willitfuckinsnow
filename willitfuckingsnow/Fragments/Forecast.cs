@@ -38,12 +38,16 @@ namespace willitfuckingsnow.Fragments
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            //ListAdapter = new ArrayAdapter<WeatherState>(Activity, Android.Resource.Layout.SimpleExpandableListItem1, new WeatherState[] { });
-
-            ListAdapter = new ForecastAdapter(Activity, store.State.Future.ToArray());
+            ListAdapter = new ForecastAdapter(Activity, store.State.Future.ToList());
             var view = inflater.Inflate(Resource.Layout.fragment_forecast, container, false);
+            //view.FindViewById<Button>(Resource.Id.button_refreshForecast).Click += OnRefreshButtonPressed;
             this.store.Dispatch(Actions.SwitchToForecast);
             return view;
+        }
+
+        public void OnRefreshButtonPressed(object sender, EventArgs args)
+        {
+            store.Dispatch(Actions.SwitchToForecast);
         }
 
         public void OnError(Exception error)
@@ -52,7 +56,12 @@ namespace willitfuckingsnow.Fragments
 
         public void OnNext(IApplicationState state)
         {
-            ListAdapter = new ForecastAdapter(Activity, store.State.Future.ToArray());
+            if (ListAdapter is ForecastAdapter adapter)
+            {
+                adapter.Update(store.State.Future.ToList());
+                Activity.RunOnUiThread(() => adapter.NotifyDataSetChanged());
+            }
+
         }
 
         public void OnCompleted()

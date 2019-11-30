@@ -23,10 +23,15 @@ namespace willitfuckingsnow.Data.Redux
             State = initialState;
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task Dispatch(Action<TReduxState> action)
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
+            //_ = Task.Run(async () =>
+            //  {
             State = await action(State);
             Notify();
+            //});
         }
 
         public void Commit(Mutation<TReduxState> mutation)

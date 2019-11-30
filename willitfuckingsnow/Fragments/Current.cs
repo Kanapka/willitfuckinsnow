@@ -53,7 +53,7 @@ namespace willitfuckingsnow.Fragments
                 view.FindViewById<TextView>(Resource.Id.textView_date).Text = state.Today.Date.ToString("MMMM dd, yyyy");
                 view.FindViewById<TextView>(Resource.Id.textView_additional).Text = state.Today.AdditionalStatus;
                 view.FindViewById<TextView>(Resource.Id.textView_temperature).Text = $"{state.Today.Temperature} °C";
-                view.FindViewById<Button>(Resource.Id.button_refreshCurrent).Text = state.LoadingToday
+                view.FindViewById<Button>(Resource.Id.button_refreshCurrent).Text = state.Busy.Today
                     ? Context.Resources.GetString(Resource.String.button_loading)
                     : Context.Resources.GetString(Resource.String.button_refresh);
             }
