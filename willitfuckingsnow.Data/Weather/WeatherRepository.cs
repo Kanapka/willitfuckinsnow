@@ -23,7 +23,7 @@ namespace willitfuckingsnow.Data.Weather
             Config = config;
         }
 
-        public Task<WeatherState> GetCurrent()
+        public Task<WeatherState> Get(DateTime date)
         {
             var rng = new Random();
             return Task.FromResult(new WeatherState
@@ -38,7 +38,7 @@ namespace willitfuckingsnow.Data.Weather
             });
         }
 
-        public Task<WeatherState[]> GetForecast()
+        public Task<WeatherState[]> Get(IEnumerable<DateTime> dates)
         {
             var rng = new Random();
             string[] Summaries = new[]

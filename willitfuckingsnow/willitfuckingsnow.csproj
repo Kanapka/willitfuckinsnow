@@ -60,6 +60,7 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions.cs" />
     <Compile Include="Adapters\ForecastAdapter.cs" />
     <Compile Include="Adapters\ViewPagerAdapter.cs" />
     <Compile Include="App.cs" />
@@ -146,6 +147,10 @@
     <ProjectReference Include="..\willitfuckingsnow.Data\willitfuckingsnow.Data.csproj">
       <Project>{c343b263-21e8-4314-928b-85a66f7764eb}</Project>
       <Name>willitfuckingsnow.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\willitfuckingsnow.Service\willitfuckingsnow.Services.csproj">
+      <Project>{49706bb3-e7d1-486d-8ccc-6153e0dd8ba3}</Project>
+      <Name>willitfuckingsnow.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

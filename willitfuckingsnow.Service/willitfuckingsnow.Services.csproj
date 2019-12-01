@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C343B263-21E8-4314-928B-85A66F7764EB}</ProjectGuid>
+    <ProjectGuid>{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{9ef11e43-1701-4396-8835-8392d57abb70}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>willitfuckingsnow.Data</RootNamespace>
-    <AssemblyName>willitfuckingsnow.Data</AssemblyName>
+    <RootNamespace>willitfuckingsnow.Services</RootNamespace>
+    <AssemblyName>willitfuckingsnow.Services</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -46,17 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
-    <Compile Include="Redux\Interfaces.cs" />
-    <Compile Include="Redux\ReduxStore.cs" />
-    <Compile Include="SavedState\SavedStateContentProvider.cs" />
+    <Compile Include="WeatherService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State\ApplicationState.cs" />
-    <Compile Include="State\WeatherState.cs" />
-    <Compile Include="Weather\IWeatherRepository.cs" />
-    <Compile Include="Weather\WeatherRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -74,9 +66,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\willitfuckingsnow.Common\willitfuckingsnow.Common.csproj">
-      <Project>{fecaf7a5-cece-4ee3-89ab-479b2ff1c4fe}</Project>
-      <Name>willitfuckingsnow.Common</Name>
+    <ProjectReference Include="..\willitfuckingsnow.Data\willitfuckingsnow.Data.csproj">
+      <Project>{c343b263-21e8-4314-928b-85a66f7764eb}</Project>
+      <Name>willitfuckingsnow.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

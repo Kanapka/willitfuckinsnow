@@ -9,7 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "willitfuckingsnow.Data", "w
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "willitfuckingsnow.API", "willitfuckingsnow.API\willitfuckingsnow.API.csproj", "{A9641A88-38FD-4BEF-A3CC-0F0E8AB229F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "willitfuckingsnow.Common", "willitfuckingsnow.Common\willitfuckingsnow.Common.csproj", "{FECAF7A5-CECE-4EE3-89AB-479B2FF1C4FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "willitfuckingsnow.Common", "willitfuckingsnow.Common\willitfuckingsnow.Common.csproj", "{FECAF7A5-CECE-4EE3-89AB-479B2FF1C4FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "willitfuckingsnow.Services", "willitfuckingsnow.Service\willitfuckingsnow.Services.csproj", "{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{FECAF7A5-CECE-4EE3-89AB-479B2FF1C4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FECAF7A5-CECE-4EE3-89AB-479B2FF1C4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FECAF7A5-CECE-4EE3-89AB-479B2FF1C4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49706BB3-E7D1-486D-8CCC-6153E0DD8BA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

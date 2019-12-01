@@ -15,12 +15,15 @@ using willitfuckingsnow.Fragments;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Data;
+using willitfuckingsnow.Services;
 
 namespace willitfuckingsnow
 {
     [Application(Label = "@string/app_name")]
     class App : Application
     {
+        IServiceConnection connection;
+
         public App(IntPtr h, JniHandleOwnership jho) : base(h, jho)
         {
         }
@@ -37,6 +40,7 @@ namespace willitfuckingsnow
 
             // display resources
             container.Register<IAppPageCollection, WeatherPageCollection>();
+
             base.OnCreate();
         }
     }
