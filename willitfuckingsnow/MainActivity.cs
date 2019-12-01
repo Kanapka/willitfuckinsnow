@@ -9,19 +9,26 @@ using willitfuckingsnow.Adapters;
 using willitfuckingsnow.Fragments;
 using Android.Support.V4.App;
 using TinyIoC;
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Data;
+using System.Threading.Tasks;
+using System.Threading;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace willitfuckingsnow
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : FragmentActivity
     {
-        AppPage[] Pages { get; set; }
+        Fragment[] Pages { get; set; }
         ViewPager ViewPager { get; set; }
         BottomNavigationView Navigation { get; set; }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Pages = TinyIoCContainer.Current.Resolve<IAppPageCollection>()?.Pages ?? throw new System.Exception("IOC NOT WORKING");
 
@@ -40,6 +47,9 @@ namespace willitfuckingsnow
         private void OnNavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs args)
         {
             ViewPager.SetCurrentItem(args.Item.Order, true);
+            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
+            store.Dispatch(Actions.SwitchToForecast);
+            store.Dispatch(Actions.SwitchToCurrent);
         }
     }
 }

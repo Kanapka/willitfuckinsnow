@@ -12,6 +12,9 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Fragment = Android.Support.V4.App.Fragment;
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Data;
 
 namespace willitfuckingsnow.Fragments
 {
@@ -19,26 +22,41 @@ namespace willitfuckingsnow.Fragments
     {
         public string Location { get; set; } = "";
 
+        public Current(IReduxStore<IApplicationState> store) : base(store)
+        {
+        }
+
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your fragment here
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-
             var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
-            var location = view.FindViewById<TextView>(Resource.Id.textView_location);
-            location.Text = "FUCK";
-            Task.Run(() =>
-            {
-                Thread.Sleep(5000);
-                location.Text = "lol wtf";
-            });
+            view.FindViewById(Resource.Id.button_refreshCurrent).Click += OnRefreshButtonPressed;
+            store.Dispatch(Actions.SwitchToCurrent);
             return view;
+        }
 
+        public void OnRefreshButtonPressed(object sender, EventArgs args)
+        {
+            store.Dispatch(Actions.SwitchToCurrent);
+        }
+
+        public override void OnNext(IApplicationState state)
+        {
+            if (this.View is View view)
+            {
+                view.FindViewById<TextView>(Resource.Id.textView_location).Text = state.Today.Location;
+                view.FindViewById<TextView>(Resource.Id.textView_status).Text = state.Today.Status;
+                view.FindViewById<TextView>(Resource.Id.textView_date).Text = state.Today.Date.ToString("MMMM dd, yyyy");
+                view.FindViewById<TextView>(Resource.Id.textView_additional).Text = state.Today.AdditionalStatus;
+                view.FindViewById<TextView>(Resource.Id.textView_temperature).Text = $"{state.Today.Temperature} °C";
+                view.FindViewById<Button>(Resource.Id.button_refreshCurrent).Text = state.Busy.Today
+                    ? Context.Resources.GetString(Resource.String.button_loading)
+                    : Context.Resources.GetString(Resource.String.button_refresh);
+            }
         }
     }
 }

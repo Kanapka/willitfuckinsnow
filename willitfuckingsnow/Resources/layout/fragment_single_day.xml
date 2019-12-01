@@ -1,12 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="65dp"
+    android:padding="8dp">
     <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textView_single_date_day"
         android:layout_width="match_parent"
         android:text="Wednesday"
-        android:layout_margin="8dp"
-        android:layout_height="match_parent" />
+        android:layout_height="25dp" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:columnCount="2"
+        android:rowCount="1">
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textView_single_date_status"
+            android:layout_width="wrap_content"
+            android:text="Hail so dense your dick will fall off"
+            android:layout_height="20dp"
+            android:layout_weight="0.70"
+            android:layout_column="0"
+            android:layout_row="0"/>
+        <TextView
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textView_single_date_temperature"
+            android:layout_width="wrap_content"
+            android:text="15C"
+            android:layout_height="20dp"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_gravity="end"
+            android:layout_weight="0.30"/>
+    </GridLayout>
 </LinearLayout>

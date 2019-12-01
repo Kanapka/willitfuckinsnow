@@ -9,11 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using willitfuckingsnow.Data.State;
 
 namespace willitfuckingsnow.Data.Weather
 {
     public interface IWeatherRepository
     {
-        Task<WeatherStateDTO> Get();
+        Task<WeatherState> GetCurrent();
+        Task<WeatherState[]> GetForecast();
     }
 }
