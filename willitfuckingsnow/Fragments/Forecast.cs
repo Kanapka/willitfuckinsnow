@@ -41,13 +41,13 @@ namespace willitfuckingsnow.Fragments
             ListAdapter = new ForecastAdapter(Activity, store.State.Future.ToList());
             var view = inflater.Inflate(Resource.Layout.fragment_forecast, container, false);
             //view.FindViewById<Button>(Resource.Id.button_refreshForecast).Click += OnRefreshButtonPressed;
-            this.store.Dispatch(Actions.SwitchToForecast);
+            this.store.Commit(Actions.InitializeUpdateForecast);
             return view;
         }
 
         public void OnRefreshButtonPressed(object sender, EventArgs args)
         {
-            store.Dispatch(Actions.SwitchToForecast);
+            store.Commit(Actions.InitializeUpdateForecast);
         }
 
         public void OnError(Exception error)

@@ -41,8 +41,6 @@ namespace willitfuckingsnow
             ViewPager.Adapter = new ViewPagerAdapter(SupportFragmentManager, Pages);
             Navigation = FindViewById<BottomNavigationView>(Resource.Id.navigation);
             Navigation.NavigationItemSelected += OnNavigationItemSelected;
-
-            UpdateCurrent();
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -52,83 +50,10 @@ namespace willitfuckingsnow
         }
         private void OnNavigationItemSelected(object sender, BottomNavigationView.NavigationItemSelectedEventArgs args)
         {
-
-            UpdateCurrent();
-            UpdateForecast();
             ViewPager.SetCurrentItem(args.Item.Order, true);
             var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
-        }
-        private void UpdateCurrent()
-        {
-            var intent = new Intent(Android.App.Application.Context, typeof(WeatherService));
-            var dates = new string[]
-            {
-                DateTime.Now.ToString()
-            };
-
-            intent.PutStringArrayListExtra(
-                WeatherServiceKeys.Dates,
-                dates.ToList());
-            intent.PutExtra(
-                WeatherServiceKeys.ResultReciever,
-                new SingleDayResultReciever());
-            StartService(intent);
-        }
-
-        private void UpdateForecast()
-        {
-            var intent = new Intent(Android.App.Application.Context, typeof(WeatherService));
-            var dates = new DateTime[]
-            {
-                DateTime.Now,
-                DateTime.Now.AddDays(1),
-                DateTime.Now.AddDays(2),
-                DateTime.Now.AddDays(3),
-                DateTime.Now.AddDays(4)
-            }
-            .Select(d => d.ToString());
-
-            intent.PutStringArrayListExtra(
-                WeatherServiceKeys.Dates,
-                dates.ToList());
-            intent.PutExtra(
-                WeatherServiceKeys.ResultReciever,
-                new MultipleDaysResultReciever());
-            StartService(intent);
-        }
-    }
-    public class SingleDayResultReciever : ResultReceiver
-    {
-        public SingleDayResultReciever() : base(new Handler())
-        {
-            ;
-        }
-
-        protected override void OnReceiveResult(int resultCode, Bundle resultData)
-        {
-            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecasts).Cast<WeatherState>();
-            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
-            var payload = new CurrentWeather();
-            payload.weather = results.First();
-            store.Commit(Actions.UpdateCurrent, payload);
-            base.OnReceiveResult(resultCode, resultData);
-        }
-    }
-
-    public class MultipleDaysResultReciever : ResultReceiver
-    {
-        public MultipleDaysResultReciever() : base(new Handler())
-        {
-            ;
-        }
-        protected override void OnReceiveResult(int resultCode, Bundle resultData)
-        {
-            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecasts).Cast<WeatherState>();
-            var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
-            var payload = new WeatherCollection();
-            payload.states = results;
-            store.Commit(Actions.UpdateForecast, payload);
-            base.OnReceiveResult(resultCode, resultData);
+            store.Commit(Actions.InitializeUpdateCurrent);
+            store.Commit(Actions.InitializeUpdateForecast);
         }
     }
 }
