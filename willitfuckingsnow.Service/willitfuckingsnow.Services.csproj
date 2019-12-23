@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReminderService.cs" />
+    <Compile Include="JobScheduler.cs" />
+    <Compile Include="NotificationService.cs" />
+    <Compile Include="SnowForecastingService.cs" />
     <Compile Include="WeatherService.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

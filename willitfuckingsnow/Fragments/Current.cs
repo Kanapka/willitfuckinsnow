@@ -49,7 +49,8 @@ namespace willitfuckingsnow.Fragments
 
         public void OnScheduleButtonPressed(object sender, EventArgs args)
         {
-            this.Context.RegisterJob<ReminderService>();
+            NotificationService.SetNotification(Context);
+            this.Context.RegisterJob<SnowForecastingService>();
         }
 
         public override void OnNext(IApplicationState state)
