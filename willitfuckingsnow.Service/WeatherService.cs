@@ -14,7 +14,6 @@ namespace willitfuckingsnow.Services
     [Service]
     public class WeatherService : IntentService
     {
-        const int NOTIFICATION_ID = 39058624;
         IWeatherRepository Repository { get; set; }
 
         public WeatherService()
@@ -23,8 +22,6 @@ namespace willitfuckingsnow.Services
         }
         protected override void OnHandleIntent(Intent intent)
         {
-
-            var resultReciever1 = intent.GetParcelableExtra(WeatherServiceKeys.ResultReciever);
             var resultReciever = intent.GetParcelableExtra(WeatherServiceKeys.ResultReciever) as ResultReceiver;
 
             var dates = Dates(intent)

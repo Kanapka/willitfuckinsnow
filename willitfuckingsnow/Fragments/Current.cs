@@ -16,6 +16,7 @@ using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Data;
 using willitfuckingsnow.Services;
+using Android.App.Job;
 
 namespace willitfuckingsnow.Fragments
 {
@@ -36,7 +37,7 @@ namespace willitfuckingsnow.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
             view.FindViewById(Resource.Id.button_refreshCurrent).Click += OnRefreshButtonPressed;
-
+            view.FindViewById(Resource.Id.button_scheduleJob).Click += OnScheduleButtonPressed;
             store.Commit(Actions.InitializeUpdateCurrent);
             return view;
         }
@@ -44,6 +45,11 @@ namespace willitfuckingsnow.Fragments
         public void OnRefreshButtonPressed(object sender, EventArgs args)
         {
             store.Commit(Actions.InitializeUpdateCurrent);
+        }
+
+        public void OnScheduleButtonPressed(object sender, EventArgs args)
+        {
+            this.Context.RegisterJob<ReminderService>();
         }
 
         public override void OnNext(IApplicationState state)
