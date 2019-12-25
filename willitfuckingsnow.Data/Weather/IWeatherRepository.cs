@@ -9,13 +9,14 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Optional;
 using willitfuckingsnow.Data.State;
 
 namespace willitfuckingsnow.Data.Weather
 {
     public interface IWeatherRepository
     {
-        Task<WeatherState> GetCurrent();
-        Task<WeatherState[]> GetForecast();
+        Task<WeatherState> Get(DateTime date);
+        Task<WeatherState[]> Get(IEnumerable<DateTime> dates);
     }
 }

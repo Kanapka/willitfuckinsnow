@@ -35,6 +35,12 @@ namespace willitfuckingsnow.Data.Redux
             Notify();
         }
 
+        public void Commit<P>(Mutation<TReduxState, P> mutation, P payload) where P : ActionPayload
+        {
+            State = mutation(State, payload);
+            Notify();
+        }
+
         public IDisposable Subscribe(IObserver<TReduxState> observer)
         {
             Observers.Add(observer);

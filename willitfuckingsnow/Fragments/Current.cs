@@ -15,6 +15,7 @@ using Fragment = Android.Support.V4.App.Fragment;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Data;
+using willitfuckingsnow.Services;
 
 namespace willitfuckingsnow.Fragments
 {
@@ -35,13 +36,14 @@ namespace willitfuckingsnow.Fragments
         {
             var view = inflater.Inflate(Resource.Layout.fragment_current, container, false);
             view.FindViewById(Resource.Id.button_refreshCurrent).Click += OnRefreshButtonPressed;
-            store.Dispatch(Actions.SwitchToCurrent);
+
+            store.Commit(Actions.InitializeUpdateCurrent);
             return view;
         }
 
         public void OnRefreshButtonPressed(object sender, EventArgs args)
         {
-            store.Dispatch(Actions.SwitchToCurrent);
+            store.Commit(Actions.InitializeUpdateCurrent);
         }
 
         public override void OnNext(IApplicationState state)

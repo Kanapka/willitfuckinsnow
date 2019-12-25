@@ -15,6 +15,10 @@ using willitfuckingsnow.Data;
 using System.Threading.Tasks;
 using System.Threading;
 using Fragment = Android.Support.V4.App.Fragment;
+using Android.Content;
+using willitfuckingsnow.Services;
+using System;
+using System.Linq;
 
 namespace willitfuckingsnow
 {
@@ -48,8 +52,8 @@ namespace willitfuckingsnow
         {
             ViewPager.SetCurrentItem(args.Item.Order, true);
             var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
-            store.Dispatch(Actions.SwitchToForecast);
-            store.Dispatch(Actions.SwitchToCurrent);
+            store.Commit(Actions.InitializeUpdateCurrent);
+            store.Commit(Actions.InitializeUpdateForecast);
         }
     }
 }
