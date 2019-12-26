@@ -5,7 +5,12 @@ using System.Threading.Tasks;
 
 namespace willitfuckingsnow.Common.DTOs
 {
-    public class LocationDTO
+    public class WeatherRequestDTO
+    {
+        public Location Location { get; set; }
+        public DateTime[] Dates { get; set; }
+    }
+    public class Location
     {
         public float Longitude { get; set; }
         public float Latitude { get; set; }

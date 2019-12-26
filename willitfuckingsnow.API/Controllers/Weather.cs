@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using willitfuckingsnow.Common.DTOs;
+using willitfuckingsnow.API.Services;
 
 namespace willitfuckingsnow.API.Controllers
 {
@@ -17,16 +18,21 @@ namespace willitfuckingsnow.API.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<Weather> _logger;
+        ILogger<Weather> _logger;
+        IForwarder Forwarder;
 
-        public Weather(ILogger<Weather> logger)
+        public Weather(
+            ILogger<Weather> logger,
+            IForwarder forwarder)
         {
             _logger = logger;
+            Forwarder = forwarder;
         }
 
         [HttpGet("current")]
-        public WeatherStateDTO Get([FromBody] LocationDTO location)
+        public WeatherStateDTO Get([FromBody] WeatherRequestDTO request)
         {
+            var response = Forwarder.GetCurrent(request.Location).Result;
             var rng = new Random();
             return new WeatherStateDTO
             {
@@ -40,7 +46,7 @@ namespace willitfuckingsnow.API.Controllers
                     : 0
             };
         }
-        public WeatherStateDTO[] Forecast([FromBody] LocationDTO location)
+        public WeatherStateDTO[] Forecast([FromBody] WeatherRequestDTO location)
         {
             var rng = new Random();
             return new WeatherStateDTO[]
