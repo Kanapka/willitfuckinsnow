@@ -10,12 +10,12 @@ using Newtonsoft.Json.Serialization;
 
 namespace willitfuckingsnow.API.Services
 {
-    public interface IForwarder
+    public interface IExternalAPI
     {
         Task<External.ResponseDTO> GetCurrent(Location location);
         Task<External.ResponseDTO> GetForecast(Location location, int days);
     }
-    public class Forwarder : IForwarder
+    public class ExternalAPI : IExternalAPI
     {
         string BaseUrl { get; set; }
         HttpClient Client { get; set; }
@@ -23,7 +23,7 @@ namespace willitfuckingsnow.API.Services
         string CurrentEndpoint => BaseUrl + "/current.json";
         string ForecastEndpoint => BaseUrl + "/forecast.json";
 
-        public Forwarder(
+        public ExternalAPI(
             string baseUrl,
             HttpClient client,
             IAuthorization authorization)

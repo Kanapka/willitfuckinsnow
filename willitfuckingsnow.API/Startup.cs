@@ -43,8 +43,8 @@ namespace willitfuckingsnow.API
             services
                 .AddSingleton<IAuthorization>(_ => new Authorization(settings.ApiKeyPath))
                 .AddSingleton(new HttpClient())
-                .AddSingleton<IForwarder>(c
-                    => new Forwarder(
+                .AddSingleton<IExternalAPI>(c
+                    => new ExternalAPI(
                         settings.ApiEndpoint,
                         c.GetRequiredService<HttpClient>(),
                         c.GetRequiredService<IAuthorization>()))
