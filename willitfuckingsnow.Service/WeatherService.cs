@@ -4,37 +4,42 @@ using Android.OS;
 using System;
 using Optional;
 using System.Linq;
-using willitfuckingsnow.Data;
-using willitfuckingsnow.Data.Weather;
 using willitfuckingsnow.Data.State;
 using System.Collections.Generic;
+using willitfuckingsnow.Services.Weather;
+using willitfuckingsnow.Common.DTOs;
 
 namespace willitfuckingsnow.Services
 {
     [Service]
     public class WeatherService : IntentService
     {
-        const int NOTIFICATION_ID = 39058624;
+        Location location = new Location { Latitude = 20, Longitude = 50 };
         IWeatherRepository Repository { get; set; }
 
         public WeatherService()
         {
-            Repository = new WeatherRepository(new Configuration());
+            Repository = new WeatherRepository(
+                new Configuration(),
+                new System.Net.Http.HttpClient());
         }
         protected override void OnHandleIntent(Intent intent)
         {
-
-            var resultReciever1 = intent.GetParcelableExtra(WeatherServiceKeys.ResultReciever);
             var resultReciever = intent.GetParcelableExtra(WeatherServiceKeys.ResultReciever) as ResultReceiver;
+            var command = intent.GetStringExtra(WeatherServiceKeys.Command);
+            var forecasts = new List<WeatherState>();
 
-            var dates = Dates(intent)
-                .Select(x => DateTime.TryParse(x, out var date)
-                        ? Option.Some(date)
-                        : Option.None<DateTime>())
-                .Where(f => f.HasValue)
-                .Select(f => f.ValueOr(() => DateTime.MinValue));
-
-            var forecasts = Forecast(dates);
+            switch (command)
+            {
+                case WeatherServiceKeys.Current:
+                    forecasts.Add(Current(location));
+                    break;
+                case WeatherServiceKeys.Forecast:
+                    forecasts.AddRange(Forecast(location));
+                    break;
+                default:
+                    break;
+            }
 
             var bundle = new Bundle();
             bundle.PutParcelableArray(
@@ -42,23 +47,22 @@ namespace willitfuckingsnow.Services
                 forecasts.ToArray());
 
             resultReciever.Send(Result.Ok, bundle);
-
         }
 
-        string[] Dates(Intent intent)
-            => intent.Extras.GetStringArray(WeatherServiceKeys.Dates) ?? new string[] { };
+        WeatherState Current(Location location)
+            => Repository.Current(location).Result;
 
-        IEnumerable<WeatherState> Forecast(IEnumerable<DateTime> dates)
-            => Repository.Forecast(dates).Result;
-
-        WeatherState Forecast(DateTime date)
-            => Repository.Current(date).Result;
+        IEnumerable<WeatherState> Forecast(Location location)
+            => Repository.Forecast(location).Result;
     }
 
     public class WeatherServiceKeys
     {
-        public static string Dates => "Dates";
-        public static string ResultReciever => "Recievier";
-        public static string Forecasts => "Forecasts";
+        public const string Dates = "Dates";
+        public const string Command = "Command";
+        public const string Current = "Current";
+        public const string Forecast = "Forecast";
+        public const string ResultReciever = "Recievier";
+        public const string Forecasts = "Forecasts";
     }
 }

@@ -20,7 +20,7 @@ namespace willitfuckingsnow.Services.Weather
     }
     public class Configuration : IConfiguration
     {
-        public string API => "http://localhost:60910";
+        public string API => "https://10.0.2.2:443/weather";
         public string Current => API + "/current";
         public string Forecast => API + "/forecast";
     }

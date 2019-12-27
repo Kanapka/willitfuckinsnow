@@ -38,6 +38,9 @@ namespace willitfuckingsnow.API.Controllers
             var response = ExternalApi.GetForecast(location, 7).Result;
             return response.GetForecast();
         }
+
+        [HttpGet("heartbeat")]
+        public string Heartbeat() => "Alive";
     }
 }
 
