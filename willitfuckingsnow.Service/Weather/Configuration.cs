@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace willitfuckingsnow.Data
+namespace willitfuckingsnow.Services.Weather
 {
     public interface IConfiguration
     {

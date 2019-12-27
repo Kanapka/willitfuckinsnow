@@ -49,10 +49,10 @@ namespace willitfuckingsnow.Services
             => intent.Extras.GetStringArray(WeatherServiceKeys.Dates) ?? new string[] { };
 
         IEnumerable<WeatherState> Forecast(IEnumerable<DateTime> dates)
-            => Repository.Get(dates).Result;
+            => Repository.Forecast(dates).Result;
 
         WeatherState Forecast(DateTime date)
-            => Repository.Get(date).Result;
+            => Repository.Current(date).Result;
     }
 
     public class WeatherServiceKeys
