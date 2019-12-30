@@ -59,7 +59,7 @@ namespace willitfuckingsnow.API
                 app.UseDeveloperExceptionPage();
             }
             app
-                .UseHttpsRedirection()
+                //.UseHttpsRedirection()
                 .UseRouting()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>

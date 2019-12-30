@@ -7605,7 +7605,7 @@ namespace willitfuckingsnow
 		{
 			
 			// aapt resource value: 0x7F0E0000
-			public const int devcert = 2131623936;
+			public const int cert = 2131623936;
 			
 			static Raw()
 			{

@@ -12,14 +12,4 @@
     <ProjectReference Include="..\willitfuckingsnow.Common\willitfuckingsnow.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Certificate\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Certificate\devcert.pfx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
