@@ -8,6 +8,7 @@ using willitfuckingsnow.Data.State;
 using System.Collections.Generic;
 using willitfuckingsnow.Services.Weather;
 using willitfuckingsnow.Common.DTOs;
+using System.Net.Http;
 
 namespace willitfuckingsnow.Services
 {
@@ -19,9 +20,12 @@ namespace willitfuckingsnow.Services
 
         public WeatherService()
         {
+
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
             Repository = new WeatherRepository(
                 new Configuration(),
-                new System.Net.Http.HttpClient());
+                new System.Net.Http.HttpClient(handler));
         }
         protected override void OnHandleIntent(Intent intent)
         {

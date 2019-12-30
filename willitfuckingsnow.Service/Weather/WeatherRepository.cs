@@ -32,6 +32,8 @@ namespace willitfuckingsnow.Services.Weather
 
         public async Task<WeatherState> Current(Location location)
         {
+            var response1 = await Client.GetAsync("https://10.0.2.2/test");
+            var content1 = await response1.Content.ReadAsStringAsync();
             var response = await Client.PostAsync(
                 Config.Current,
                 new StringContent(JsonConvert.SerializeObject(location), Encoding.UTF8, "application/json"));

@@ -23,6 +23,11 @@ namespace willitfuckingsnow
 
         public override void OnCreate()
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyerrors)
+                =>
+            {
+                return true;
+            };
             var container = TinyIoCContainer.Current;
 
             //data resources
