@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using willitfuckingsnow.API.Services;
+using System.Net.Http;
 
 namespace willitfuckingsnow.API
 {
@@ -22,30 +26,46 @@ namespace willitfuckingsnow.API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var settings = Configuration.Get<Settings>();
+            services
+                .AddControllers()
+                .AddNewtonsoftJson(o =>
+                {
+                    var contractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    };
+                    o.SerializerSettings.ContractResolver = contractResolver;
+                });
+
+            services
+                .AddSingleton<IAuthorization>(_ => new Authorization(settings.ApiKeyPath))
+                .AddSingleton(new HttpClient())
+                .AddSingleton<IExternalAPI>(c
+                    => new ExternalAPI(
+                        settings.ApiEndpoint,
+                        c.GetRequiredService<HttpClient>(),
+                        c.GetRequiredService<IAuthorization>()))
+                ;
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app
+                //.UseHttpsRedirection()
+                .UseRouting()
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
         }
     }
 }

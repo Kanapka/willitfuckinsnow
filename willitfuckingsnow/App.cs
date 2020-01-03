@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using willitfuckingsnow.Data.Weather;
+using Java.Security;
+using Java.Security.Cert;
+using Javax.Net.Ssl;
+using System;
 using TinyIoC;
-using willitfuckingsnow.Fragments;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
-using willitfuckingsnow.Data;
-using willitfuckingsnow.Services;
+using willitfuckingsnow.Fragments;
 
 namespace willitfuckingsnow
 {
@@ -30,18 +23,53 @@ namespace willitfuckingsnow
 
         public override void OnCreate()
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyerrors)
+                =>
+            {
+                return true;
+            };
             var container = TinyIoCContainer.Current;
 
             //data resources
-            container.Register<IConfiguration, Configuration>().AsSingleton();
-            container.Register<IWeatherRepository, WeatherRepository>().AsSingleton();
             container.Register<IApplicationState, ApplicationState>().AsSingleton();
             container.Register<IReduxStore<IApplicationState>, ReduxStore<IApplicationState>>().AsSingleton();
 
             // display resources
             container.Register<IAppPageCollection, WeatherPageCollection>();
 
+            //AddCertificate();
+
             base.OnCreate();
+        }
+
+        void AddCertificate(int certificateId, int id)
+        {
+            var certificateFactory = CertificateFactory.GetInstance("X.509");
+            string keyStoreType = KeyStore.DefaultType;
+            KeyStore keyStore = KeyStore.GetInstance(keyStoreType);
+            keyStore.Load(null, null);
+
+
+            Certificate certificate;
+            using (var stream = Application.Context.Resources.OpenRawResource(certificateId))
+                certificate = certificateFactory.GenerateCertificate(stream);
+            keyStore.SetCertificateEntry("ca" + id, certificate);
+
+            string tmfAlgorithm = TrustManagerFactory.DefaultAlgorithm;
+            TrustManagerFactory tmf = TrustManagerFactory.GetInstance(tmfAlgorithm);
+            tmf.Init(keyStore);
+
+
+            // Create a TrustManager that trusts the CAs in our KeyStore
+            var trustManagerFactory = TrustManagerFactory.GetInstance(TrustManagerFactory.DefaultAlgorithm);
+            trustManagerFactory.Init(keyStore);
+            // Create an SSLContext that uses our TrustManager
+
+            var ctx = SSLContext.GetInstance("TLS");
+            ctx.Init(null, tmf.GetTrustManagers(), null);
+
+            // apply the new context
+            var socketFactory = ctx.SocketFactory;
         }
     }
 }

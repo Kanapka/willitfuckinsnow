@@ -1,16 +1,11 @@
-﻿using System;
+﻿using Android.Content;
+using Android.OS;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using willitfuckingsnow.Data.State;
-using System.Threading.Tasks;
-using System.Threading;
-using Android.Content;
-using willitfuckingsnow.Services;
-using willitfuckingsnow.Data;
-using Android.OS;
-using willitfuckingsnow.Data.Redux;
 using TinyIoC;
+using willitfuckingsnow.Data.Redux;
+using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Services;
 
 namespace willitfuckingsnow
 {
@@ -44,14 +39,10 @@ namespace willitfuckingsnow
         {
             state.Busy.Today = true;
             var intent = new Intent(Android.App.Application.Context, typeof(WeatherService));
-            var dates = new string[]
-            {
-                DateTime.Now.ToString()
-            };
 
-            intent.PutStringArrayListExtra(
-                WeatherServiceKeys.Dates,
-                dates.ToList());
+            intent.PutExtra(
+                WeatherServiceKeys.Command,
+                WeatherServiceKeys.Current);
             intent.PutExtra(
                 WeatherServiceKeys.ResultReciever,
                 new SingleDayResultReciever());
@@ -64,19 +55,10 @@ namespace willitfuckingsnow
         {
             state.Busy.Future = true;
             var intent = new Intent(Android.App.Application.Context, typeof(WeatherService));
-            var dates = new DateTime[]
-            {
-                DateTime.Now,
-                DateTime.Now.AddDays(1),
-                DateTime.Now.AddDays(2),
-                DateTime.Now.AddDays(3),
-                DateTime.Now.AddDays(4)
-            }
-            .Select(d => d.ToString());
 
-            intent.PutStringArrayListExtra(
-                WeatherServiceKeys.Dates,
-                dates.ToList());
+            intent.PutExtra(
+                WeatherServiceKeys.Command,
+                WeatherServiceKeys.Forecast);
             intent.PutExtra(
                 WeatherServiceKeys.ResultReciever,
                 new MultipleDaysResultReciever());

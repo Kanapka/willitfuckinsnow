@@ -11,12 +11,13 @@ using Android.Views;
 using Android.Widget;
 using Optional;
 using willitfuckingsnow.Data.State;
+using willitfuckingsnow.Common.DTOs;
 
-namespace willitfuckingsnow.Data.Weather
+namespace willitfuckingsnow.Services.Weather
 {
     public interface IWeatherRepository
     {
-        Task<WeatherState> Get(DateTime date);
-        Task<WeatherState[]> Get(IEnumerable<DateTime> dates);
+        Task<WeatherState> Current(Location location);
+        Task<WeatherState[]> Forecast(Location location);
     }
 }
