@@ -1,0 +1,4 @@
+The application requires https - this is achieved by setting up a 
+reverse proxy with nginx. nginx communicates with kestrel over http, 
+but it has it's own (self-signed) ssl certificate that *should* 
+satisfy android's https requirements

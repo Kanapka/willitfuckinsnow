@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using willitfuckingsnow.Common.DTOs;
 using willitfuckingsnow.Data.State;
-using willitfuckingsnow.Data.Weather;
-using willitfuckingsnow.Common.DTOs;
 
 namespace willitfuckingsnow.Data.Extensions
 {

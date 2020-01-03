@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-
-namespace willitfuckingsnow.Data
+﻿namespace willitfuckingsnow.Services.Weather
 {
     public interface IConfiguration
     {
@@ -20,7 +8,7 @@ namespace willitfuckingsnow.Data
     }
     public class Configuration : IConfiguration
     {
-        public string API => "http://localhost:60910";
+        public string API => "https://10.0.2.2/weather";
         public string Current => API + "/current";
         public string Forecast => API + "/forecast";
     }
