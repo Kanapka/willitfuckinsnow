@@ -4,40 +4,46 @@ using Android.Runtime;
 using Java.Security;
 using Java.Security.Cert;
 using Javax.Net.Ssl;
+using Nancy.TinyIoc;
 using System;
-using TinyIoC;
+using System.Net.Http;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Fragments;
+using willitfuckingsnow.Services;
+using willitfuckingsnow.Services.Weather;
 
 namespace willitfuckingsnow
 {
     [Application(Label = "@string/app_name")]
     class App : Application
     {
-        IServiceConnection connection;
-
         public App(IntPtr h, JniHandleOwnership jho) : base(h, jho)
         {
         }
 
         public override void OnCreate()
         {
-            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyerrors)
-                =>
-            {
-                return true;
-            };
             var container = TinyIoCContainer.Current;
 
             //data resources
             container.Register<IApplicationState, ApplicationState>().AsSingleton();
             container.Register<IReduxStore<IApplicationState>, ReduxStore<IApplicationState>>().AsSingleton();
 
+            container.Register(
+                (c, _) =>
+                new HttpClientHandler
+                {
+                    ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                });
+            container.Register<IConfiguration, Configuration>().AsMultiInstance();
+            container.Register((c, _) => new HttpClient(c.Resolve<HttpClientHandler>()));
+            container.Register<IWeatherRepository, WeatherRepository>().AsMultiInstance();
+
             // display resources
             container.Register<IAppPageCollection, WeatherPageCollection>();
 
-            //AddCertificate();
+            UserBotheringService.CreateNotificationChannel(this);
 
             base.OnCreate();
         }

@@ -2434,6 +2434,7 @@ namespace willitfuckingsnow
 			global::willitfuckingsnow.Services.Resource.String.app_name = global::willitfuckingsnow.Resource.String.app_name;
 			global::willitfuckingsnow.Services.Resource.String.hello = global::willitfuckingsnow.Resource.String.hello;
 			global::willitfuckingsnow.Services.Resource.String.notification_channel_name = global::willitfuckingsnow.Resource.String.notification_channel_name;
+			global::willitfuckingsnow.Services.Resource.String.notification_title = global::willitfuckingsnow.Resource.String.notification_title;
 			global::willitfuckingsnow.Services.Resource.String.search_menu_title = global::willitfuckingsnow.Resource.String.search_menu_title;
 			global::willitfuckingsnow.Services.Resource.String.status_bar_notification_info_overflow = global::willitfuckingsnow.Resource.String.status_bar_notification_info_overflow;
 			global::willitfuckingsnow.Services.Resource.Style.AlertDialog_AppCompat = global::willitfuckingsnow.Resource.Style.AlertDialog_AppCompat;
@@ -7838,34 +7839,37 @@ namespace willitfuckingsnow
 			public const int notification_channel_name = 2131689542;
 			
 			// aapt resource value: 0x7F0F0047
-			public const int password_toggle_content_description = 2131689543;
+			public const int notification_title = 2131689543;
 			
 			// aapt resource value: 0x7F0F0048
-			public const int path_password_eye = 2131689544;
+			public const int password_toggle_content_description = 2131689544;
 			
 			// aapt resource value: 0x7F0F0049
-			public const int path_password_eye_mask_strike_through = 2131689545;
+			public const int path_password_eye = 2131689545;
 			
 			// aapt resource value: 0x7F0F004A
-			public const int path_password_eye_mask_visible = 2131689546;
+			public const int path_password_eye_mask_strike_through = 2131689546;
 			
 			// aapt resource value: 0x7F0F004B
-			public const int path_password_strike_through = 2131689547;
+			public const int path_password_eye_mask_visible = 2131689547;
 			
 			// aapt resource value: 0x7F0F004C
-			public const int search_menu_title = 2131689548;
+			public const int path_password_strike_through = 2131689548;
 			
 			// aapt resource value: 0x7F0F004D
-			public const int status_bar_notification_info_overflow = 2131689549;
+			public const int search_menu_title = 2131689549;
 			
 			// aapt resource value: 0x7F0F004E
-			public const int title_current = 2131689550;
+			public const int status_bar_notification_info_overflow = 2131689550;
 			
 			// aapt resource value: 0x7F0F004F
-			public const int title_forecast = 2131689551;
+			public const int title_current = 2131689551;
 			
 			// aapt resource value: 0x7F0F0050
-			public const int title_settings = 2131689552;
+			public const int title_forecast = 2131689552;
+			
+			// aapt resource value: 0x7F0F0051
+			public const int title_settings = 2131689553;
 			
 			static String()
 			{

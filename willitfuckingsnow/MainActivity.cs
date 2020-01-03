@@ -2,23 +2,14 @@
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.V7.App;
-using Android.Support.V4.View;
-using Android.Widget;
-using willitfuckingsnow.Adapters;
-using willitfuckingsnow.Fragments;
 using Android.Support.V4.App;
-using TinyIoC;
+using Android.Support.V4.View;
+using Nancy.TinyIoc;
+using willitfuckingsnow.Adapters;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
-using willitfuckingsnow.Data;
-using System.Threading.Tasks;
-using System.Threading;
+using willitfuckingsnow.Fragments;
 using Fragment = Android.Support.V4.App.Fragment;
-using Android.Content;
-using willitfuckingsnow.Services;
-using System;
-using System.Linq;
 
 namespace willitfuckingsnow
 {

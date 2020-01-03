@@ -8,7 +8,7 @@ using willitfuckingsnow.Data.State;
 using System.Collections.Generic;
 using willitfuckingsnow.Services.Weather;
 using willitfuckingsnow.Common.DTOs;
-using System.Net.Http;
+using Nancy.TinyIoc;
 
 namespace willitfuckingsnow.Services
 {
@@ -20,12 +20,7 @@ namespace willitfuckingsnow.Services
 
         public WeatherService()
         {
-
-            var handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            Repository = new WeatherRepository(
-                new Configuration(),
-                new System.Net.Http.HttpClient(handler));
+            Repository = TinyIoCContainer.Current.Resolve<IWeatherRepository>();
         }
         protected override void OnHandleIntent(Intent intent)
         {
@@ -47,7 +42,7 @@ namespace willitfuckingsnow.Services
 
             var bundle = new Bundle();
             bundle.PutParcelableArray(
-                WeatherServiceKeys.Forecasts,
+                WeatherServiceKeys.Forecast,
                 forecasts.ToArray());
 
             resultReciever.Send(Result.Ok, bundle);
@@ -60,13 +55,11 @@ namespace willitfuckingsnow.Services
             => Repository.Forecast(location).Result;
     }
 
-    public class WeatherServiceKeys
+    public static class WeatherServiceKeys
     {
-        public const string Dates = "Dates";
         public const string Command = "Command";
         public const string Current = "Current";
         public const string Forecast = "Forecast";
         public const string ResultReciever = "Recievier";
-        public const string Forecasts = "Forecasts";
     }
 }

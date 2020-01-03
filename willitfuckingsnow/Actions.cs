@@ -1,8 +1,8 @@
 ﻿using Android.Content;
 using Android.OS;
+using Nancy.TinyIoc;
 using System.Collections.Generic;
 using System.Linq;
-using TinyIoC;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
 using willitfuckingsnow.Services;
@@ -11,26 +11,26 @@ namespace willitfuckingsnow
 {
     public class CurrentWeather : ActionPayload
     {
-        public WeatherState weather { get; set; }
+        public WeatherState Weather { get; set; }
     }
 
     public class WeatherCollection : ActionPayload
     {
-        public IEnumerable<WeatherState> states { get; set; }
+        public IEnumerable<WeatherState> States { get; set; }
     }
 
     public class Actions
     {
         public static IApplicationState FinalizeUpdateCurrent(IApplicationState state, CurrentWeather current)
         {
-            state.Today = current.weather;
+            state.Today = current.Weather;
             state.Busy.Today = false;
             return state;
         }
 
         public static IApplicationState FinalizeUpdateForecast(IApplicationState state, WeatherCollection collection)
         {
-            state.Future = collection.states;
+            state.Future = collection.States;
             state.Busy.Future = false;
             return state;
         }
@@ -73,10 +73,10 @@ namespace willitfuckingsnow
 
         protected override void OnReceiveResult(int resultCode, Bundle resultData)
         {
-            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecasts).Cast<WeatherState>();
+            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecast).Cast<WeatherState>();
             var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
             var payload = new CurrentWeather();
-            payload.weather = results.First();
+            payload.Weather = results.First();
             store.Commit(Actions.FinalizeUpdateCurrent, payload);
             base.OnReceiveResult(resultCode, resultData);
         }
@@ -87,10 +87,10 @@ namespace willitfuckingsnow
         public MultipleDaysResultReciever() : base(new Handler()) { }
         protected override void OnReceiveResult(int resultCode, Bundle resultData)
         {
-            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecasts).Cast<WeatherState>();
+            var results = resultData.GetParcelableArray(WeatherServiceKeys.Forecast).Cast<WeatherState>();
             var store = TinyIoCContainer.Current.Resolve<IReduxStore<IApplicationState>>();
             var payload = new WeatherCollection();
-            payload.states = results;
+            payload.States = results;
             store.Commit(Actions.FinalizeUpdateForecast, payload);
             base.OnReceiveResult(resultCode, resultData);
         }

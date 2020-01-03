@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Fragment = Android.Support.V4.App.Fragment;
+using System;
 using willitfuckingsnow.Data.Redux;
 using willitfuckingsnow.Data.State;
-using willitfuckingsnow.Data;
 using willitfuckingsnow.Services;
-using Android.App.Job;
 
 namespace willitfuckingsnow.Fragments
 {
@@ -49,7 +38,7 @@ namespace willitfuckingsnow.Fragments
 
         public void OnScheduleButtonPressed(object sender, EventArgs args)
         {
-            NotificationService.SetNotification(Context);
+            UserBotheringService.SetNotification(Context, "Willowy crap");
             this.Context.RegisterJob<SnowForecastingService>();
         }
 
